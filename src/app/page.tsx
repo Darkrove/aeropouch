@@ -19,7 +19,7 @@ export default function Home() {
               Belive in yourself and you will be unstoppable
             </Balance>
             <Link
-              href="/cart"
+              href="/categories/all"
               className={cn(buttonVariants({ size: "lg" }), "mt-2")}
             >
               Shop Now
