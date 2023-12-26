@@ -34,10 +34,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+      {/* 
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <PageHeader title="Welcome to Next.js + Commerce.js Template" />
-      </div>
+      </div> */}
     </main>
   );
 }
