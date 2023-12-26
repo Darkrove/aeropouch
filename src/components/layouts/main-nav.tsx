@@ -130,6 +130,10 @@ const Navbar = async () => {
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
           <MobileNav categories={newSortedCategories} />
+          <Link href="/" className="mr-6 flex items-center space-x-1 md:hidden">
+            <Icons.logo className="h-6 w-6" />
+            <span className="font-bold">{siteConfig.name}</span>
+          </Link>
           <SideNavigation />
         </div>
       </div>
