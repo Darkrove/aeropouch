@@ -23,9 +23,6 @@ const SideNavigation = () => {
           )}
         </Button>
       </Link>
-      <Button variant="ghost" className="px-2">
-        <Icons.heart className="w-6 h-6 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100" />
-      </Button>
     </div>
   );
 };

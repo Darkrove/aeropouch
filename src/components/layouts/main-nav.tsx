@@ -17,6 +17,7 @@ import client from "@/lib/commerce";
 import { cva } from "class-variance-authority";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import MobileNav from "@/components/layouts/mobile-nav";
 import SideNavigation from "@/components/layouts/side-navigation";
 
 const components: { title: string; href: string; description: string }[] = [
@@ -52,7 +53,7 @@ const Navbar = async () => {
       a.name.localeCompare(b.name)
     );
   };
-  const newSortedCategories = sort().slice(0, 6);
+  const newSortedCategories = sort();
   return (
     <header className="sticky top-0 z-40 w-full border-b border-b-stone-200 bg-white dark:border-b-stone-700 dark:bg-stone-900">
       <div className="h-16 px-10 container max-w-7xl mx-auto w-full flex justify-between items-center">
@@ -76,22 +77,24 @@ const Navbar = async () => {
                 <NavigationMenuTrigger>Shop All</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                    {newSortedCategories.map(
-                      (component: {
-                        slug: string | null;
-                        name: string;
-                        description: string | null;
-                        created: number;
-                      }) => (
-                        <ListItem
-                          key={component.slug}
-                          title={component.name}
-                          href={`/categories/${component.slug}`}
-                        >
-                          {component.description}
-                        </ListItem>
-                      )
-                    )}
+                    {newSortedCategories
+                      .slice(0, 6)
+                      .map(
+                        (component: {
+                          slug: string | null;
+                          name: string;
+                          description: string | null;
+                          created: number;
+                        }) => (
+                          <ListItem
+                            key={component.slug}
+                            title={component.name}
+                            href={`/categories/${component.slug}`}
+                          >
+                            {component.description}
+                          </ListItem>
+                        )
+                      )}
                   </ul>
                   <div className="p-4 pt-0">
                     <Separator className="mb-4" />
@@ -126,6 +129,7 @@ const Navbar = async () => {
           </NavigationMenu>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
+          <MobileNav categories={newSortedCategories} />
           <SideNavigation />
         </div>
       </div>
