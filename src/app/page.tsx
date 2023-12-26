@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Balance from "react-wrap-balancer";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@ui/button";
 import { PageHeader } from "@/components/page-header";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
@@ -16,9 +18,12 @@ export default function Home() {
             <Balance className="max-w-[46rem] text-lg text-gray-100 sm:text-xl text-center">
               Belive in yourself and you will be unstoppable
             </Balance>
-            <Button size="lg" className="mt-2">
+            <Link
+              href="/cart"
+              className={cn(buttonVariants({ size: "lg" }), "mt-2")}
+            >
               Shop Now
-            </Button>
+            </Link>
           </div>
         </div>
         <div className="w-full md:w-1/2 h-full px-4 pt-2 pb-4 md:py-10 md:pl-5 md:pr-10 ">
