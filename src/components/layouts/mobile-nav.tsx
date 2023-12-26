@@ -75,7 +75,13 @@ const MobileNav = ({ categories }: Props) => {
                 )
             )}
             <Separator />
-            <p className="font-bold">Categories</p>
+            <MobileLink
+              href="/categories/list"
+              className="font-bold"
+              onOpenChange={setOpen}
+            >
+              Categories
+            </MobileLink>
             <Separator />
             {categories?.map((category) => (
               <MobileLink

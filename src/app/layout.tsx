@@ -33,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <CartProvider>
             <div className="flex min-h-screen flex-col">
               <Navbar />
-              <div className="container flex-1">{children}</div>
+              <div className="flex-1">{children}</div>
               <Toaster />
             </div>
           </CartProvider>
