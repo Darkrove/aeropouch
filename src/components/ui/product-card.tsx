@@ -30,11 +30,11 @@ const ProductCard: FC<ProductCardProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn("bg-stone-100 rounded-md", className)} {...props}>
+    <div className={cn("bg-muted rounded-md", className)} {...props}>
       <Link href={`/products/${permalink}`}>
         <AspectRatio
           ratio={aspectRatio}
-          className="relative overflow-hidden rounded-t-md"
+          className="relative overflow-hidden rounded-t-md bg-purple-200"
         >
           <Image
             src={imageUrl}

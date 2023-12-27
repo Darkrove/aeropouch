@@ -56,7 +56,7 @@ const DemoCarousel = ({ images }: Props) => {
         <CarouselContent>
           {images.map((image) => (
             <CarouselItem key={image.id}>
-              <AspectRatio ratio={1 / 1} className="bg-muted rounded-lg">
+              <AspectRatio ratio={1 / 1} className="bg-purple-200 rounded-lg">
                 <Image
                   src={image.url}
                   alt={image.filename}
