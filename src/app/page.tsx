@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 export default function Home() {
   return (
     <main>
-      <div className="h-screen max-h-[800px] w-full flex flex-col md:flex-row">
+      <div className="h-screen w-full flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 h-full flex flex-col items-center px-4 pt-4 pb-2 md:py-10 md:pl-10 md:pr-5 justify-center">
           <div className="rounded-3xl overflow-hidden p-4 bg-[#ea712a] flex flex-col items-center justify-center w-full h-full ">
             <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1] text-white">
@@ -31,10 +31,8 @@ export default function Home() {
             <Image
               src="/hero-2.png"
               alt="Lavish Linen"
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
-              className="rounded-3xl border"
+              fill
+              className="rounded-3xl bg-purple-200 object-cover"
             />
           </div>
         </div>
