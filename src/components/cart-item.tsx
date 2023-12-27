@@ -27,13 +27,13 @@ const CartItem = ({ item, onUpdateCart }: CartItemProps) => {
         <div className="shrink-0 aspect-square w-[80px] md:w-[120px]">
           <AspectRatio
             ratio={1}
-            className="relative overflow-hidden rounded-md"
+            className="relative overflow-hidden rounded-md bg-purple-100"
           >
             <Image
               src={item.image.url}
               alt={item.name}
-              width={120}
-              height={120}
+              fill
+              className="object-cover"
             />
           </AspectRatio>
         </div>
