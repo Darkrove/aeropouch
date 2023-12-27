@@ -57,7 +57,7 @@ const MobileNav = ({ categories }: Props) => {
           className="flex items-center"
           onOpenChange={setOpen}
         >
-          <Icons.logo className="mr-2 h-4 w-4" />
+          <Icons.logo className="mr-1 h-5 w-5" />
           <span className="font-bold">{siteConfig.name}</span>
         </MobileLink>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
