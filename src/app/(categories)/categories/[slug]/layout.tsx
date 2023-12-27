@@ -1,5 +1,10 @@
+import { siteConfig } from "@/config/site";
+
 export const metadata = {
-  title: "AeroPouch | Categories",
+  title: {
+    default: "Categories",
+    template: `%s | ${siteConfig.name}`,
+  },
   description: "",
 };
 

@@ -1,5 +1,10 @@
+import { siteConfig } from "@/config/site";
+
 export const metadata = {
-  title: "AeroPouch | Cart",
+  title: {
+    default: "Cart",
+    template: `%s | ${siteConfig.name}`,
+  },
   description: "Linen for shirts, pants, dresses, and more.",
 };
 
