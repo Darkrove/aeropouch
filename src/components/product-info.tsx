@@ -160,6 +160,7 @@ const ProductInfo = ({ product, variants }: Props) => {
         <Button
           className="w-full rounded-lg"
           onClick={() => addToCart(product.id, variantId)}
+          disabled={loading}
         >
           {loading ? (
             <>
