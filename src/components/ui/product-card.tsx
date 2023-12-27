@@ -30,7 +30,7 @@ const ProductCard: FC<ProductCardProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn("bg-muted rounded-md", className)} {...props}>
+    <div className={cn("bg-muted rounded-md border", className)} {...props}>
       <Link href={`/products/${permalink}`}>
         <AspectRatio
           ratio={aspectRatio}
