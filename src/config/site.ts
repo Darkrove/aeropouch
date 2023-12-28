@@ -8,7 +8,7 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "AeroPouch",
+  name: "AeroPouch.",
   description: "Manufactured with love by AeroPouch",
   links: {
     twitter: "https://twitter.com/sajjads72619701",

@@ -2,10 +2,10 @@ import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: {
-    default: "Products",
+    default: "Categories",
     template: `%s | ${siteConfig.name}`,
   },
-  description: "",
+  description: siteConfig.description,
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
