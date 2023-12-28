@@ -61,3 +61,12 @@ export const getUser = async (): Promise<User> => {
     throw error;
   }
 };
+
+export const logOut = async () => {
+  try {
+    await client.customer.logout();
+  } catch (error) {
+    console.error("Authentication error:", error);
+    throw error;
+  }
+};
