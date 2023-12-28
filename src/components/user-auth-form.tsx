@@ -31,7 +31,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     resolver: zodResolver(userAuthSchema),
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
+  const [isError, setIsError] = React.useState<boolean>(false);
+  const [message, setMessage] = React.useState<string | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
   React.useEffect(() => {
@@ -43,6 +44,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       }
 
       try {
+        setIsLoading(true);
         const jwt = await getToken(token);
         if (jwt) {
           setCustomer();
@@ -51,29 +53,50 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       } catch (error) {
         // Handle login error
         console.error("Login error:", error);
+        setIsError(true);
+        setMessage("There was an error logging in with Gmail, Please retry!");
+        console.log(error);
+        // setMessage(error?.data?.error?.errors.email)
+        toast.error("Something went wrong", {
+          description: message,
+        });
+      } finally {
+        setIsLoading(false);
       }
     };
 
     handleLogin();
-  }, [router, searchParams]);
+  }, [message, router, searchParams]);
 
   async function onSubmit(data: FormData) {
-    setIsLoading(true);
-    const signInResult = await signIn(
-      data.email.toLowerCase(),
-      `${window.location.origin}/login?token={token}`
-    );
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const signInResult = await signIn(
+        data.email.toLowerCase(),
+        `${window.location.origin}/login?token={token}`
+      );
 
-    if (!signInResult) {
-      return toast.error("Something went wrong.", {
-        description: "Your sign in request failed. Please try again.",
+      if (!signInResult) {
+        return toast.error("Something went wrong.", {
+          description: "Your sign in request failed. Please try again.",
+        });
+      }
+
+      return toast.success("Check your email", {
+        description:
+          "We sent you a login link. Be sure to check your spam too.",
       });
+    } catch (error) {
+      setIsError(true);
+      setMessage("Your sign in request failed. Please try again.");
+      console.log(error);
+      // setMessage(error?.data?.error?.errors.email)
+      toast.error("Something went wrong", {
+        description: message,
+      });
+    } finally {
+      setIsLoading(false);
     }
-
-    return toast.success("Check your email", {
-      description: "We sent you a login link. Be sure to check your spam too.",
-    });
   }
 
   return (
@@ -91,7 +114,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading || isGitHubLoading}
+              disabled={isLoading}
               {...register("email")}
             />
             {errors?.email && (
