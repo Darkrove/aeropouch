@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 // import { signIn } from "next-auth/react";
@@ -14,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Icons } from "@/components/icons";
+import { getToken, signIn } from "@/lib/auth";
+import { setCustomer } from "@/store/actions/authenticateActions";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -30,30 +33,47 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
+  React.useEffect(() => {
+    const token = searchParams?.get("token");
+
+    const handleLogin = async () => {
+      if (!token) {
+        return;
+      }
+
+      try {
+        const jwt = await getToken(token);
+        if (jwt) {
+          setCustomer();
+          router.push("/");
+        }
+      } catch (error) {
+        // Handle login error
+        console.error("Login error:", error);
+      }
+    };
+
+    handleLogin();
+  }, [router, searchParams]);
 
   async function onSubmit(data: FormData) {
     setIsLoading(true);
-
-    // const signInResult = await signIn("email", {
-    //   email: data.email.toLowerCase(),
-    //   redirect: false,
-    //   callbackUrl: searchParams?.get("from") || "/dashboard",
-    // });
-    console.log(data.email);
+    const signInResult = await signIn(
+      data.email.toLowerCase(),
+      `${window.location.origin}/login?token={token}`
+    );
     setIsLoading(false);
 
-    // if (!signInResult?.ok) {
-    //   return toast({
-    //     title: "Something went wrong.",
-    //     description: "Your sign in request failed. Please try again.",
-    //     variant: "destructive",
-    //   });
-    // }
+    if (!signInResult) {
+      return toast.error("Something went wrong.", {
+        description: "Your sign in request failed. Please try again.",
+      });
+    }
 
-    // return toast({
-    //   title: "Check your email",
-    //   description: "We sent you a login link. Be sure to check your spam too.",
-    // });
+    return toast.success("Check your email", {
+      description: "We sent you a login link. Be sure to check your spam too.",
+    });
   }
 
   return (

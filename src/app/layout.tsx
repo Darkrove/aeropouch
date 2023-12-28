@@ -28,7 +28,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
           <CartProvider>
             <div className="flex min-h-screen flex-col">
               <div className="flex-1">{children}</div>
-              <Toaster />
+              <Toaster richColors />
             </div>
           </CartProvider>
         </body>
