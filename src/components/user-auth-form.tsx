@@ -54,11 +54,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         // Handle login error
         console.error("Login error:", error);
         setIsError(true);
-        setMessage("There was an error logging in with Gmail, Please retry!");
-        console.log(error);
+        setMessage("There was an error logging in with Email, Please retry!");
         // setMessage(error?.data?.error?.errors.email)
         toast.error("Something went wrong", {
-          description: message,
+          description:
+            "There was an error logging in with Email, Please retry!",
         });
       } finally {
         setIsLoading(false);
@@ -92,7 +92,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       console.log(error);
       // setMessage(error?.data?.error?.errors.email)
       toast.error("Something went wrong", {
-        description: message,
+        description: "Your sign in request failed. Please try again.",
       });
     } finally {
       setIsLoading(false);
