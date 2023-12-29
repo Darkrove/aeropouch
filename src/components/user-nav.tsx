@@ -11,6 +11,7 @@ import {
 } from "@ui/dropdown-menu";
 import { Button } from "@ui/button";
 import LogoutButton from "@components/logout-btn";
+import Link from "next/link";
 
 type Props = {
   user: User;
@@ -38,7 +39,7 @@ export function UserNav({ user }: Props) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
+            <Link href="/account">Profile</Link>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
