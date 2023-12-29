@@ -125,9 +125,7 @@ const page = () => {
                 </TableCell>
                 <TableCell>{order.totalAmount}</TableCell>
                 <TableCell className="text-right">
-                  <p className="text-blue-400 peer-hover::underline">
-                    view order
-                  </p>
+                  <p className="text-blue-400 hover:underline">view order</p>
                 </TableCell>
               </TableRow>
             ))}
