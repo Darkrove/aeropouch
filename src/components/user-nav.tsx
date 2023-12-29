@@ -16,11 +16,11 @@ type Props = {
   user: User;
 };
 
-export async function UserNav({ user }: Props) {
+export function UserNav({ user }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="relative h-8">
+        <Button variant="secondary" className="relative">
           {`Hii, ${user.firstname}!`}
         </Button>
       </DropdownMenuTrigger>
