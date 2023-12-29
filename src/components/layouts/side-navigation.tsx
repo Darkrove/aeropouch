@@ -29,11 +29,11 @@ const SideNavigation = () => {
   useEffect(() => {
     const handle = async () => {
       try {
-        const isLog = await actionVerifyAuth();
-        console.log("isLogged: ", isLog);
-        if (isLog) {
-          setIsLogeed(true);
-          const userData = await actionGetUser();
+        const isLogged = await verifyAuth();
+        console.error("isLogged:", isLogged);
+
+        if (isLogged) {
+          const userData = await getUser();
           console.log(userData);
           setUser(userData); // Set user data in the state
         }
@@ -42,7 +42,6 @@ const SideNavigation = () => {
         console.error("Login error:", error);
       }
     };
-
     handle();
   }, []);
 

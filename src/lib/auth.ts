@@ -42,7 +42,7 @@ export const getToken = async (token: string | null): Promise<string> => {
   }
 };
 
-export const verifyAuth = async (): Promise<string> => {
+export const verifyAuth = async (): Promise<boolean> => {
   try {
     const isLogged = await client.customer.isLoggedIn();
     return isLogged;
@@ -56,6 +56,15 @@ export const getUser = async (): Promise<User> => {
   try {
     const user = await client.customer.about();
     return user;
+  } catch (error) {
+    console.error("Authentication error:", error);
+    throw error;
+  }
+};
+
+export const logOut = async () => {
+  try {
+    await client.customer.logout();
   } catch (error) {
     console.error("Authentication error:", error);
     throw error;
