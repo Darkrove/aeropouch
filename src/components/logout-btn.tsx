@@ -24,9 +24,12 @@ const LogoutButton: FC<LogoutButtonProps> = ({}) => {
     }
   };
   return (
-    <div onClick={signUserOut} className="cursor-pointer w-full">
-      {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+    <div
+      onClick={signUserOut}
+      className="cursor-pointer w-full flex justify-between items-center"
+    >
       Sign out
+      {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
     </div>
   );
 };
