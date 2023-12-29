@@ -1,4 +1,4 @@
-import { User } from "@/lib/auth";
+import { User } from "@/types/customer";
 import {
   DropdownMenu,
   DropdownMenuContent,

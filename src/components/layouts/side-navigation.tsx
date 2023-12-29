@@ -9,18 +9,25 @@ import { Icons } from "@/components/icons";
 import { useCartState } from "@/store/cart";
 import { Button, buttonVariants } from "@ui/button";
 import { cn } from "@/lib/utils";
-import { User, getUser, logOut, verifyAuth } from "@/lib/auth";
-import { UserNav } from "../user-nav";
+import { UserNav } from "@/components/user-nav";
+import {
+  actionGetUser,
+  actionVerifyAuth,
+} from "@/lib/server-actions/auth-actions";
+import { User } from "@/types/customer";
 
 const SideNavigation = () => {
   const { total_unique_items } = useCartState();
+  const [isLogged, setIsLogeed] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     const handle = async () => {
       try {
-        const isLogged = await verifyAuth();
-        if (isLogged) {
-          const userData = await getUser();
+        const isLog = await actionVerifyAuth();
+        console.log("isLogged: ", isLog);
+        if (isLog) {
+          setIsLogeed(true);
+          const userData = await actionGetUser();
           console.log(userData);
           setUser(userData); // Set user data in the state
         }
@@ -36,7 +43,7 @@ const SideNavigation = () => {
   return (
     <div className="flex items-center space-x-2">
       <div className="hidden sm:block">
-        {user ? (
+        {user && isLogged ? (
           <UserNav user={user} />
         ) : (
           // If user is not logged in, show login link

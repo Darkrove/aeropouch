@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Icons } from "@/components/icons";
-import { getToken, signIn } from "@/lib/auth";
 import { setCustomer } from "@/store/actions/authenticateActions";
 import { actionSignUpUser } from "@/lib/server-actions/auth-actions";
 
@@ -35,51 +34,51 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isError, setIsError] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string | null>(null);
   const searchParams = useSearchParams();
-  const router = useRouter();
-  React.useEffect(() => {
-    const token = searchParams?.get("token");
+  // const router = useRouter();
+  // React.useEffect(() => {
+  //   const token = searchParams?.get("token");
 
-    const handleLogin = async () => {
-      if (!token) {
-        return;
-      }
+  //   const handleLogin = async () => {
+  //     if (!token) {
+  //       return;
+  //     }
 
-      try {
-        setIsLoading(true);
-        const jwt = await getToken(token);
-        if (jwt) {
-          setCustomer();
-          router.replace("/");
-        }
-      } catch (error) {
-        // Handle login error
-        console.error("Login error:", error);
-        setIsError(true);
-        setMessage("There was an error logging in with Email, Please retry!");
-        // setMessage(error?.data?.error?.errors.email)
-        toast.error("Something went wrong", {
-          description:
-            "There was an error logging in with Email, Please retry!",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  //     try {
+  //       setIsLoading(true);
+  //       const jwt = await getToken(token);
+  //       if (jwt) {
+  //         setCustomer();
+  //         router.replace("/");
+  //       }
+  //     } catch (error) {
+  //       // Handle login error
+  //       console.error("Login error:", error);
+  //       setIsError(true);
+  //       setMessage("There was an error logging in with Email, Please retry!");
+  //       // setMessage(error?.data?.error?.errors.email)
+  //       toast.error("Something went wrong", {
+  //         description:
+  //           "There was an error logging in with Email, Please retry!",
+  //       });
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-    handleLogin();
-  }, [message, router, searchParams]);
+  //   handleLogin();
+  // }, [message, router, searchParams]);
 
   async function onSubmit(data: FormData) {
     try {
       setIsLoading(true);
       const signInResult = await actionSignUpUser(
         data.email.toLowerCase(),
-        `${window.location.origin}/login?token={token}`
+        `${window.location.origin}/api/auth/callback/?token={token}`
       );
 
-      if (!signInResult?.error) {
+      if (!signInResult) {
         return toast.error("Something went wrong.", {
-          description: signInResult?.error?.message,
+          description: "Your sign in request failed. Please try again.",
         });
       }
 
