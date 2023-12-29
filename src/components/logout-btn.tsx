@@ -3,8 +3,9 @@
 import { FC, useState } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { actionLogOut } from "@/lib/server-actions/auth-actions";
+import { logOut } from "@/lib/auth";
 
 interface LogoutButtonProps {}
 
@@ -14,7 +15,7 @@ const LogoutButton: FC<LogoutButtonProps> = ({}) => {
   const signUserOut = async () => {
     setIsLoading(true);
     try {
-      await actionLogOut();
+      await logOut();
       router.replace("/login");
     } catch (error) {
       toast.error("Error signing out", {

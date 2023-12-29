@@ -74,7 +74,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       setIsLoading(true);
       const signInResult = await actionSignUpUser(
         data.email.toLowerCase(),
-        `${window.location.origin}/logign?token={token}`
+        `${window.location.origin}/login?token={token}`
       );
 
       if (!signInResult) {
