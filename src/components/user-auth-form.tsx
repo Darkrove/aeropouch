@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { Icons } from "@/components/icons";
 import { getToken, signIn } from "@/lib/auth";
 import { setCustomer } from "@/store/actions/authenticateActions";
+import { actionSignUpUser } from "@/lib/server-actions/auth-actions";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -48,7 +49,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         const jwt = await getToken(token);
         if (jwt) {
           setCustomer();
-          router.push("/");
+          router.replace("/");
         }
       } catch (error) {
         // Handle login error
@@ -71,14 +72,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   async function onSubmit(data: FormData) {
     try {
       setIsLoading(true);
-      const signInResult = await signIn(
+      const signInResult = await actionSignUpUser(
         data.email.toLowerCase(),
         `${window.location.origin}/login?token={token}`
       );
 
-      if (!signInResult) {
+      if (!signInResult?.error) {
         return toast.error("Something went wrong.", {
-          description: "Your sign in request failed. Please try again.",
+          description: signInResult?.error?.message,
         });
       }
 
