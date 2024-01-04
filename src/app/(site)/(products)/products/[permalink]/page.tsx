@@ -36,14 +36,14 @@ const ProductPage = async ({
         </div>
         <ProductInfo product={product} variants={variants} />
       </div>
-      {/* <div className="pt-5">
+      <div className="pt-5">
         <Separator className="my-4" />
         <LargeHeading size="sm">Similar products</LargeHeading>
         <Separator className="my-4" />
         <div>
           <ProductList products={product.related_products} />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
